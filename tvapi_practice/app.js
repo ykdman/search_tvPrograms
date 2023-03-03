@@ -10,7 +10,9 @@ searchForm.addEventListener('submit',async (element)=>{
     makeImages(tvApiResponse.data);
 })
 
-const makeImages = (images) => {
+const makeImages = (images) => {   
+    removeBeforeImages();
+
     for (let result of images){
         if(result.show.image){
             const img = document.createElement('img');
@@ -18,6 +20,16 @@ const makeImages = (images) => {
             document.body.append(img);
         }
         
+    }
+}
+
+function removeBeforeImages() {
+    // search 버튼을 눌렀을때, 이전에 있던 것들 삭제
+    const beforeImages = document.querySelectorAll('img');
+    if (beforeImages.length > 0) {
+        for (let image of beforeImages){
+            image.remove();
+        }
     }
 }
 
